@@ -1,0 +1,98 @@
+<div class="container">
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/logo.png" class="img_logo" alt="logo">
+      <div class="logo">TalentJob</div>
+    </div>
+    <nav class="nav">
+      <a href="#">For independents</a>
+      <a href="#">For clients</a>
+      <a href="#">For partners</a>
+    </nav>
+    <div class="auth">
+      <button class="signup">Sign up</button>
+      <button class="login">Login</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="text">
+      <h1>Unlock Your Potential</h1>
+      <p>Our freelance platform unites skilled independents with visionary clients,<br>
+         providing the talent and resources to turn your ideas into reality</p>
+      <div class="actions">
+        <button class="primary">Find talent</button>
+        <button class="secondary">Get hired</button>
+      </div>
+    </div>
+    <div class="image">
+      <img src="assets/nuriya.png" alt="Freelancer working on laptop" />
+    </div>
+  </section>
+
+  <section class="search-filter">
+    <input type="text" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" placeholder="Search by title or description..." />
+    <div class="toggle">
+      <button class="active">Project</button>
+      <button>People</button>
+    </div>
+
+    <!-- ФИЛЬТРЫ -->
+    <div class="filters">
+      <label for="category">Category</label>
+      <select id="category" [(ngModel)]="filters.category">
+        <option value="">All</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+
+      <label for="salary">Min salary</label>
+      <input type="number" id="salary" [(ngModel)]="filters.salary" />
+
+      <label for="jobType">Job type</label>
+      <select id="jobType" [(ngModel)]="filters.jobType">
+        <option value="">All</option>
+        <option *ngFor="let type of jobTypes" [value]="type">{{ type }}</option>
+      </select>
+
+      <button (click)="applyFilters()">Apply filters</button>
+    </div>
+  </section>
+
+  <nav class="categories">
+    <button class="active">Featured</button>
+    <button>Popular</button>
+    <button>Brand Designer</button>
+    <button>Web Designer</button>
+    <button>Video Editor</button>
+    <button>Content Creator</button>
+    <button>Graphic Designer</button>
+    <button>Front-end Developer</button>
+    <button>UX/UI designer</button>
+  </nav>
+
+  <!-- СПИСОК ВАКАНСИЙ -->
+  <section class="vacancy-list">
+    <div class="vacancy-card" *ngFor="let vacancy of vacancies">
+      <h3>{{ vacancy.title }}</h3>
+      <p>{{ vacancy.description }}</p>
+      <p><strong>Категория:</strong> {{ vacancy.category }}</p>
+      <p><strong>Зарплата:</strong> {{ vacancy.salary }}₸</p>
+      <p><strong>Тип:</strong> {{ vacancy.jobType }}</p>
+      <button class="respond-btn" (click)="onApplyToVacancy(vacancy.id)">Откликнуться</button>
+    </div>
+  </section>
+
+  <div class="explore">
+    <button (click)="scrollToBottom()">Explore more</button>
+  </div>
+</div>
+
+<div class="stats-section">
+  <div class="stats-container">
+    <h2 class="stats-heading">Join 10K+ companies<br>and 1M+ independents</h2>
+    <div class="buttons-container">
+      <button class="primary-btn">Find talent</button>
+      <button class="secondary-btn">Get hired</button>
+    </div>
+  </div>
+</div>

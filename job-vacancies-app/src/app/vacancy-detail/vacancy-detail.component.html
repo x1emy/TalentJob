@@ -1,0 +1,110 @@
+<div *ngIf="vacancy" class="vacancy-detail">
+  <div class="vacancy-header">
+    <h2>{{ vacancy.title }}</h2>
+    
+    <!-- Блок компании -->
+    <div class="company-card" *ngIf="vacancy.companyName">
+      <div class="company-logo" *ngIf="vacancy.companyLogo">
+        <img [src]="vacancy.companyLogo" alt="Логотип компании">
+      </div>
+      <div class="company-info">
+        <h3>{{ vacancy.companyName }}</h3>
+        <div class="company-meta">
+          <span *ngIf="vacancy.industry"><i class="fas fa-globe"></i> {{ vacancy.industry }}</span>
+          <span *ngIf="vacancy.companySize"><i class="fas fa-users"></i> {{ vacancy.companySize }}</span>
+          <span *ngIf="vacancy.companyRating"><i class="fas fa-star"></i> {{ vacancy.companyRating }}/5</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="vacancy-meta">
+      <span class="meta-item" *ngIf="vacancy.location"><i class="fas fa-map-marker-alt"></i> {{ vacancy.location }}</span>
+      <span class="meta-item"><i class="fas fa-wallet"></i> {{ vacancy.salary | currency }}</span>
+      <span class="meta-item" *ngIf="vacancy.employmentType"><i class="fas fa-clock"></i> {{ vacancy.employmentType }}</span>
+      <span class="meta-item" *ngIf="vacancy.experience"><i class="fas fa-briefcase"></i> Опыт: {{ vacancy.experience }}</span>
+      <span class="meta-item" *ngIf="vacancy.postDate"><i class="fas fa-calendar-alt"></i> {{ vacancy.postDate | date }}</span>
+      <span class="meta-item" *ngIf="vacancy.views"><i class="fas fa-eye"></i> {{ vacancy.views }}</span>
+    </div>
+  </div>
+
+  <div class="vacancy-content">
+    <div class="vacancy-section">
+      <h3><i class="fas fa-align-left"></i> Описание</h3>
+      <p>{{ vacancy.description }}</p>
+    </div>
+
+    <div class="vacancy-section" *ngIf="vacancy.responsibilities?.length">
+      <h3><i class="fas fa-tasks"></i> Обязанности</h3>
+      <ul>
+        <li *ngFor="let responsibility of vacancy.responsibilities">{{ responsibility }}</li>
+      </ul>
+    </div>
+
+    <div class="vacancy-section" *ngIf="vacancy.requirements?.length">
+      <h3><i class="fas fa-graduation-cap"></i> Требования</h3>
+      <ul>
+        <li *ngFor="let requirement of vacancy.requirements">{{ requirement }}</li>
+      </ul>
+    </div>
+
+    <div class="vacancy-section" *ngIf="vacancy.additionalSkills?.length">
+      <h3><i class="fas fa-plus-circle"></i> Будет плюсом</h3>
+      <ul>
+        <li *ngFor="let plus of vacancy.additionalSkills">{{ plus }}</li>
+      </ul>
+    </div>
+
+    <div class="vacancy-section" *ngIf="vacancy.benefits?.length">
+      <h3><i class="fas fa-thumbs-up"></i> Условия</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item" *ngFor="let benefit of vacancy.benefits">
+          <i [class]="benefit.icon"></i>
+          <span>{{ benefit.text }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Форма отклика -->
+  <div class="application-form">
+    <h3><i class="fas fa-paper-plane"></i> Откликнуться на вакансию</h3>
+    <form (ngSubmit)="onApply()" #applicationForm="ngForm">
+      <div class="form-group">
+        <label for="full_name">Ваше имя*</label>
+        <input type="text" id="full_name" name="full_name" required 
+               [(ngModel)]="applicationData.full_name" class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input type="email" id="email" name="email" required
+               [(ngModel)]="applicationData.email" class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input type="tel" id="phone" name="phone"
+               [(ngModel)]="applicationData.phone" class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Сопроводительное письмо*</label>
+        <textarea id="message" name="message" required
+                  [(ngModel)]="applicationData.message" class="form-textarea"></textarea>
+      </div>
+
+      <div *ngIf="submitSuccess" class="alert success">
+        Заявка успешно отправлена!
+      </div>
+      
+      <div *ngIf="submitError" class="alert error">
+        Произошла ошибка при отправке. Пожалуйста, попробуйте позже.
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="!applicationForm.form.valid || isSubmitting">
+        <i class="fas fa-paper-plane"></i> 
+        {{ isSubmitting ? 'Отправка...' : 'Отправить' }}
+      </button>
+    </form>
+  </div>
+</div>
