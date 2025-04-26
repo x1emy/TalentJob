@@ -41,12 +41,6 @@ source venv/bin/activate      # Linux/macOS
 .\venv\Scripts\activate       # Windows
 ```
 
-Install dependencies:
-```
-bash
-pip install -r requirements.txt
-Set up the database:
-```
 
 Configure settings.py with your PostgreSQL credentials.
 Run migrations:
