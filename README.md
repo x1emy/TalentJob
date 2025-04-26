@@ -26,68 +26,84 @@ Ensure you have the following installed on your system:
 ## Installation & Setup
 
 1. Clone the Repository
-
+```
 bash
 git clone <repository-url>
 cd <project-directory>
+```
 2. Backend Setup (Django + DRF)
 
 Create & activate a virtual environment:
-
+```
 bash
 python3 -m venv venv
 source venv/bin/activate      # Linux/macOS
 .\venv\Scripts\activate       # Windows
-Install dependencies:
+```
 
+Install dependencies:
+```
 bash
 pip install -r requirements.txt
 Set up the database:
+```
 
 Configure settings.py with your PostgreSQL credentials.
 Run migrations:
+```
 bash
 python manage.py migrate
-Create a superuser (admin):
+```
 
+Create a superuser (admin):
+```
 bash
 python manage.py createsuperuser
 (Use admin / 1202 for default credentials.)
+```
 
 Run the Django development server:
-
+```
 bash
 python manage.py runserver
-(Backend will be available at http://localhost:8000.)
+(Backend will be available at http://127.0.0.1:8000.)
+```
 
 3. Frontend Setup (Angular)
 
 Navigate to the frontend directory:
-
+```
 bash
 cd job-vacancies-app
-Install dependencies:
+```
 
+Install dependencies:
+```
 bash
 npm install
-Run the Angular development server:
+```
 
+Run the Angular development server:
+```
 bash
 ng serve
 (Frontend will be available at http://localhost:4200.)
+```
 
 🔌 API Endpoints
 
 Endpoint	Description
-api/applications/	Submit & manage applications
-admin/	Django admin panel
+### api/applications/	Submit & manage applications
+### admin/	Django admin panel
+
 Default Admin Credentials:
 
+```
 Username: admin
 Password: 1202
 📜 License
+```
 
-This project is licensed under the MIT License.
 
 📬 Contact : balgymbekova1@gmail.com
 
